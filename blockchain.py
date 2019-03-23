@@ -9,7 +9,7 @@ class Blockchain(object):
         #genesis block 생성
         self.new_block(previous_hash = 1)
         
-    def new_block(self, previous_hash = None, nonce, difficulty, merkleroot):
+    def new_block(self, previous_hash, nonce, difficulty, merkleroot):
         block = {
             'index' : len(self.chain) + 1,
             'timestamp' : time(),
@@ -25,9 +25,10 @@ class Blockchain(object):
         self.chain.append(block)
         return block
     
-    def new_transaction(self, user, checkpoint, time, pass_fail):
+    def new_transaction(self, number, user, checkpoint, time, pass_fail):
         
         self.current_transactions.append({
+            'number' : number,          #인덱스번호
             'user': user,               #user = 출입자
             'checkpoint' : checkpoint,  #checkpoint = 보안장치(문)
             'time' : time(),            #time = 출입시도 시각
